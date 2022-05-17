@@ -18,7 +18,11 @@ struct ContentView: View {
             .ignoresSafeArea()
             .overlay {
                 VStack(spacing: 20) {
-                    RedGreenBlueColorView(redColor: redSliderValue, greenColor: greenSliderValue, blueColor: blueSliderValue)
+                    RedGreenBlueColorView(
+                        redColor: redSliderValue,
+                        greenColor: greenSliderValue,
+                        blueColor: blueSliderValue
+                    )
                     HorizontalStackView(sliderValue: $redSliderValue, sliderColor: .red)
                     HorizontalStackView(sliderValue: $greenSliderValue, sliderColor: .green)
                     HorizontalStackView(sliderValue: $blueSliderValue, sliderColor: .blue)
@@ -27,12 +31,8 @@ struct ContentView: View {
                 .padding(EdgeInsets(top: 50, leading: 16, bottom: 16, trailing: 16))
                 .toolbar {
                     ToolbarItemGroup(placement: .keyboard) {
-                        Button(">") {
-                            
-                        }
-                        Button("<") {
-                            
-                        }
+                        Button(">") {}
+                        Button("<") {}
                         Button("Done") {
                             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                         }

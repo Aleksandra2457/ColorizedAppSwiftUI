@@ -10,6 +10,7 @@ import SwiftUI
 struct HorizontalStackView: View {
     
     @Binding var sliderValue: Double
+    
     let sliderColor: Color
     
     var body: some View {
@@ -18,8 +19,8 @@ struct HorizontalStackView: View {
                 .frame(width: 40)
             Slider(value: $sliderValue, in: 0...255, step: 1)
                 .tint(sliderColor)
-            TextField("255", value: $sliderValue, formatter: NumberFormatter())
-                .frame(width: 60)
+            TextField("0-255", value: $sliderValue, formatter: NumberFormatter())
+                .frame(width: 80)
                 .textFieldStyle(.roundedBorder)
                 .keyboardType(.decimalPad)
         }
