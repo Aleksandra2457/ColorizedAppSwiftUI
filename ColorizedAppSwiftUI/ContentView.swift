@@ -31,8 +31,10 @@ struct ContentView: View {
                 .padding(EdgeInsets(top: 50, leading: 16, bottom: 16, trailing: 16))
                 .toolbar {
                     ToolbarItemGroup(placement: .keyboard) {
+                        HStack {
                         Button(action: {}, label: { Image(systemName: "chevron.up") })
                         Button(action: {}, label: { Image(systemName: "chevron.down") })
+                        }
                         Button("Done") {
                             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                         }
