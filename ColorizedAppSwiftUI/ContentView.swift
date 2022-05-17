@@ -20,12 +20,25 @@ struct ContentView: View {
     var body: some View {
         VStack(spacing: 20) {
             ColorRectangleView(color: Color(red: redSliderValue / 255, green: greenSliderValue / 255, blue: blueSliderValue / 255))
-            HorizontalStackView(sliderValue: $redSliderValue, sliderValueText: $redSliderTextValue, sliderColor: .red)
-            HorizontalStackView(sliderValue: $greenSliderValue, sliderValueText: $greenSliderTextValue, sliderColor: .green)
-            HorizontalStackView(sliderValue: $blueSliderValue, sliderValueText: $blueSliderTextValue, sliderColor: .blue)
+            HorizontalStackView(sliderValue: $redSliderValue, sliderColor: .red)
+            HorizontalStackView(sliderValue: $greenSliderValue, sliderColor: .green)
+            HorizontalStackView(sliderValue: $blueSliderValue, sliderColor: .blue)
             Spacer()
         }
         .padding(EdgeInsets(top: 50, leading: 16, bottom: 16, trailing: 16))
+        .toolbar {
+            ToolbarItemGroup(placement: .keyboard) {
+                Button(">") {
+                    
+                }
+                Button("<") {
+                    
+                }
+                Button("Done") {
+                    
+                }
+            }
+        }
     }
         
 }
@@ -39,8 +52,6 @@ struct ContentView_Previews: PreviewProvider {
 struct HorizontalStackView: View {
     
     @Binding var sliderValue: Double
-    @Binding var sliderValueText: String
-    
     let sliderColor: Color
     
     var body: some View {
@@ -49,12 +60,15 @@ struct HorizontalStackView: View {
                 .frame(width: 40)
             Slider(value: $sliderValue, in: 0...255, step: 1)
                 .tint(sliderColor)
-            TextField("255", text: $sliderValueText)
+            TextField("255", text: .constant(String(format: "%.0f", arguments: [sliderValue])))
                 .frame(width: 60)
                 .textFieldStyle(.roundedBorder)
                 .keyboardType(.decimalPad)
+            
         }
         .frame(width: UIScreen.main.bounds.width - 32)
     }
-    
+        
 }
+    
+
