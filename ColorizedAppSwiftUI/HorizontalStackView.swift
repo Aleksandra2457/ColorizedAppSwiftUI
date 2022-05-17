@@ -22,7 +22,7 @@ struct HorizontalStackView: View {
             TextField("0-255", text: $sliderValue.string)
                 .frame(width: 80)
                 .textFieldStyle(.roundedBorder)
-                .keyboardType(.decimalPad)
+                .keyboardType(.numberPad)
                 .multilineTextAlignment(.center)
                 .onChange(of: sliderValue) { _ in sliderValue > 255 ? sliderValue = 255 : nil }
         }
