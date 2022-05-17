@@ -15,7 +15,7 @@ struct HorizontalStackView: View {
     
     var body: some View {
         HStack(spacing: 10) {
-            Text(String(format: "%.0f", arguments: [sliderValue]))
+            Text(sliderValue.string)
                 .frame(width: 40)
             Slider(value: $sliderValue, in: 0...255, step: 1)
                 .tint(sliderColor)
