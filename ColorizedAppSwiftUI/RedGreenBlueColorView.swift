@@ -22,7 +22,7 @@ struct RedGreenBlueColorView: View {
     }
 }
 
-struct MainRGBView_Previews: PreviewProvider {
+struct RedGreenBlueColorView_Previews: PreviewProvider {
     static var previews: some View {
         RedGreenBlueColorView(redColor: 77, greenColor: 77, blueColor: 77)
     }
