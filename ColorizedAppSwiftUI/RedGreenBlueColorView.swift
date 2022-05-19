@@ -9,21 +9,23 @@ import SwiftUI
 
 struct RedGreenBlueColorView: View {
     
-    var redColor: Double
-    var greenColor: Double
-    var blueColor: Double
+    let red: Double
+    let green: Double
+    let blue: Double
     
     var body: some View {
-        Color(red: redColor / 255, green: greenColor / 255, blue: blueColor / 255)
-            .frame(width: UIScreen.main.bounds.width - 32, height: UIScreen.main.bounds.height * 0.2)
-            .clipShape(Rectangle())
-            .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.white, lineWidth: 5))
-            .cornerRadius(15)
+        Color(red: red / 255, green: green / 255, blue: blue / 255)
+            .cornerRadius(20)
+            .frame(height: 130)
+            .overlay(
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(Color.white, lineWidth: 4)
+            )
     }
 }
 
 struct RedGreenBlueColorView_Previews: PreviewProvider {
     static var previews: some View {
-        RedGreenBlueColorView(redColor: 77, greenColor: 77, blueColor: 77)
+        RedGreenBlueColorView(red: 77, green: 77, blue: 77)
     }
 }

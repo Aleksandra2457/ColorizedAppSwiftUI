@@ -8,42 +8,85 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var red = Double.random(in: 0...255)
+    @State private var green = Double.random(in: 0...255)
+    @State private var blue = Double.random(in: 0...255)
     
-    @State private var redSliderValue = 70.0
-    @State private var greenSliderValue = 145.0
-    @State private var blueSliderValue = 235.0
+    @FocusState private var focusedField: Field?
     
     var body: some View {
-        Color.indigo
-            .ignoresSafeArea()
-            .overlay {
-                VStack(spacing: 20) {
-                    RedGreenBlueColorView(
-                        redColor: redSliderValue,
-                        greenColor: greenSliderValue,
-                        blueColor: blueSliderValue
-                    )
-                    HorizontalStackView(sliderValue: $redSliderValue, sliderColor: .red)
-                    HorizontalStackView(sliderValue: $greenSliderValue, sliderColor: .green)
-                    HorizontalStackView(sliderValue: $blueSliderValue, sliderColor: .blue)
-                    Spacer()
+        ZStack {
+            Color(#colorLiteral(red: 0, green: 0.3765624762, blue: 0.7304599881, alpha: 1))
+                .ignoresSafeArea()
+                .onTapGesture {
+                    focusedField = nil
                 }
-                .padding(EdgeInsets(top: 50, leading: 16, bottom: 16, trailing: 16))
+            
+            VStack(spacing: 40) {
+                RedGreenBlueColorView(red: red, green: green, blue: blue)
+                
+                VStack {
+                    ColorSliderView(value: $red, color: .red)
+                        .focused($focusedField, equals: .red)
+                    ColorSliderView(value: $green, color: .green)
+                        .focused($focusedField, equals: .green)
+                    ColorSliderView(value: $blue, color: .blue)
+                        .focused($focusedField, equals: .blue)
+                }
+                .frame(height: 150)
                 .toolbar {
                     ToolbarItemGroup(placement: .keyboard) {
-                        HStack {
-                        Button(action: {}, label: { Image(systemName: "chevron.up") })
-                        Button(action: {}, label: { Image(systemName: "chevron.down") })
+                        Button(action: previousField) {
+                            Image(systemName: "chevron.up")
                         }
+                        Button(action: nextField) {
+                            Image(systemName: "chevron.down")
+                        }
+                        Spacer()
                         Button("Done") {
-                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                            focusedField = nil
                         }
                     }
                 }
-                
+                Spacer()
             }
+            .padding()
+        }
+    }
+}
+
+extension ContentView {
+    private enum Field {
+        case red
+        case green
+        case blue
     }
     
+    private func nextField() {
+        switch focusedField {
+        case .red:
+            focusedField = .green
+        case .green:
+            focusedField = .blue
+        case .blue:
+            focusedField = .red
+        case .none:
+            focusedField = nil
+        }
+    }
+    
+    private func previousField() {
+        switch focusedField {
+        case .red:
+            focusedField = .blue
+        case .green:
+            focusedField = .red
+        case .blue:
+            focusedField = .green
+        case .none:
+            focusedField = nil
+        }
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
